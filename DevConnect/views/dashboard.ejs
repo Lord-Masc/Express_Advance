@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | DevConnect</title>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="dashboard-page">
+    <main class="shell dashboard-shell">
+        <section class="panel dashboard-header">
+            <div>
+                <p class="eyebrow">DevConnect</p>
+                <h1>Your Todos</h1>
+                <p class="subtitle">Keep track of the tasks that matter today.</p>
+            </div>
+            <a href="/logout" class="btn btn-secondary">Logout</a>
+        </section>
+
+        <section class="dashboard-grid">
+            <form action="/todos/add" method="POST" class="panel form-card">
+                <h2>Add a task</h2>
+                <label class="field">
+                    <span>Todo title</span>
+                    <input name="title" placeholder="What do you need to finish?" required />
+                </label>
+                <button type="submit" class="btn btn-primary">Add Todo</button>
+            </form>
+
+            <section class="panel todo-panel">
+                <div class="todo-panel-top">
+                    <h2>Task list</h2>
+                    <span class="count"><%= todos.length %> item<%= todos.length === 1 ? "" : "s" %></span>
+                </div>
+
+                <% if (todos.length === 0) { %>
+                    <div class="empty-state">
+                        <p>No todos yet. Add your first task to get started.</p>
+                    </div>
+                <% } else { %>
+                    <ul class="todo-list">
+                        <% todos.forEach(todo => { %>
+                            <li class="todo-item">
+                                <span><%= todo.title %></span>
+                                <a href="/todos/delete/<%= todo._id %>" class="btn btn-danger">Delete</a>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } %>
+            </section>
+        </section>
+    </main>
+</body>
+</html>

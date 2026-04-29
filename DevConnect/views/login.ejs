@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | DevConnect</title>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="auth-page">
+    <main class="shell">
+        <section class="hero-card">
+            <div class="hero-copy">
+                <p class="eyebrow">DevConnect</p>
+                <h1>Welcome back</h1>
+                <p class="subtitle">Sign in to manage your tasks with a cleaner, simpler workflow.</p>
+            </div>
+            <form action="/login" method="POST" class="panel form-card">
+                <h2>Login</h2>
+                <% if (typeof error !== "undefined" && error) { %>
+                    <p class="message error"><%= error %></p>
+                <% } %>
+                <label class="field">
+                    <span>Email</span>
+                    <input type="email" name="email" placeholder="you@example.com" required />
+                </label>
+                <label class="field">
+                    <span>Password</span>
+                    <input type="password" name="password" placeholder="Enter password" required />
+                </label>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <p class="form-link">New here? <a href="/register">Create an account</a></p>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

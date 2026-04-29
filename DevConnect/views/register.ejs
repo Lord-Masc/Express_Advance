@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | DevConnect</title>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="auth-page">
+    <main class="shell">
+        <section class="hero-card">
+            <div class="hero-copy">
+                <p class="eyebrow">DevConnect</p>
+                <h1>Create your account</h1>
+                <p class="subtitle">Join in and start organizing your daily work with a focused dashboard.</p>
+            </div>
+            <form action="/register" method="POST" class="panel form-card">
+                <h2>Register</h2>
+                <% if (typeof error !== "undefined" && error) { %>
+                    <p class="message error"><%= error %></p>
+                <% } %>
+                <label class="field">
+                    <span>Email</span>
+                    <input type="email" name="email" placeholder="you@example.com" required />
+                </label>
+                <label class="field">
+                    <span>Password</span>
+                    <input type="password" name="password" placeholder="Create password" required />
+                </label>
+                <button type="submit" class="btn btn-primary">Register</button>
+                <p class="form-link">Already have an account? <a href="/login">Login</a></p>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
