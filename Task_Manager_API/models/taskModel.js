@@ -1,0 +1,25 @@
+const mongoose = require("mongoose");
+
+const taskSchema = new mongoose.Schema({
+    task:{
+        type:String,
+        require:true
+    },
+    description:{
+        type:String
+    },
+    status:{
+        type:String,
+        enum:["completed","in-progress","pending"],
+        default:"in-progress"
+    },
+    priority:{
+        type:String,
+        enum:["low","medium","high"],
+        default:"medium"
+    },
+    createdBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    }
+},{timestamps:true})
