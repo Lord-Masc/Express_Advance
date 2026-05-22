@@ -1,19 +1,17 @@
 const mongoose = require("mongoose")
-const { timeStamp } = require("node:console")
-
 const userSchema = new mongoose.Schema({
     name:{
         type:String,
-        require:true
+        required:true
     },
     email:{
         type:String,
-        require:true,
+        required:true,
         unique:true,
     },
     password:{
         type:String,
-        require:true
+        required:true
     },
     role:{
        type:String,
@@ -22,6 +20,6 @@ const userSchema = new mongoose.Schema({
     },
     
 
-},{ timeStamp:true})
+},{ timestamps:true })
 
 module.exports = mongoose.model("User",userSchema)

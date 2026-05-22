@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const taskSchema = new mongoose.Schema({
     task:{
         type:String,
-        require:true
+        required:true
     },
     description:{
         type:String
@@ -23,3 +23,5 @@ const taskSchema = new mongoose.Schema({
         ref:"User"
     }
 },{timestamps:true})
+
+module.exports = mongoose.model("Task", taskSchema)

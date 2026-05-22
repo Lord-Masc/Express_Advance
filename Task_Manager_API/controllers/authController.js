@@ -3,21 +3,21 @@ const jwt = require("jsonwebtoken")
 
 const User = require("../models/userModel");
 
-const resgister = async (req, res) => {
+const register = async (req, res) => {
     try {
         const { name, email, password } = req.body;
-        const userExists = await user.findOne({ email })
-        if (email) {
+        const userExists = await User.findOne({ email })
+        if (userExists) {
             return res.status(400).json({ message: "User Already Exists" })
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = User.create({
+        const newUser = await User.create({
             name,
             email,
             password: hashedPassword
         })
         res.status(201).json({
-            sucess: true,
+            success: true,
             newUser
         })
     } catch (error) {
@@ -31,15 +31,15 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body
         const user = await User.findOne({ email })
-        if (!email) {
+        if (!user) {
             return res.status(401).json({
-                message: "Invalid Cradential"
+                message: "Invalid Credential"
             })
         }
-        const isMatch = bcrypt.compare(password, user.password)
+        const isMatch = await bcrypt.compare(password, user.password)
         if (!isMatch) {
             return res.status(401).json({
-                message: "Invaid Cradential"
+                message: "Invalid Credential"
             })
         }
         const token = jwt.sign(
@@ -57,11 +57,11 @@ const login = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(401).json({
+        res.status(500).json({
             message: error.message
         })
     }
 
 }
 
-module.exports = {resgister,login}
+module.exports = { register, login }
