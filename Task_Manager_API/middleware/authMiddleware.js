@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const protect = async (req, res, next) => {
+const protect = (req, res, next) => {
     try {
         let token;
         if (req.header.authorization && req.header.authorization.startWith("Bearer")) {
