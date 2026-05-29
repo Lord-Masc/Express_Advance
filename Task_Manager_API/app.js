@@ -5,7 +5,8 @@ const morgan = require("morgan") // For logs
 
 const authRoutes = require("./routes/authRoutes")
 const taskRoutes = require("./routes/taskRoutes")
-const userRoutes = require("./routes/userRoutes")
+const userRoutes = require("./routes/userRoutes");
+const { errorHandler } = require('./middleware/errorMiddleware');
 
 const app = express()
 
@@ -16,6 +17,7 @@ app.use(morgan("dev"))
 
 app.use("/api/auth", authRoutes);
 app.use("api/tasks",taskRoutes)
+app.use(errorHandler)
 app.use("./api/users",userRoutes)
 
 module.exports = app
