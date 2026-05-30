@@ -5,7 +5,7 @@ const authorize = require("../middleware/roleMiddleware")
 
 const router = express.Router()
 
-router.get("/admin",protect,authorize,(req,res)=>{
+router.get("/admin",protect,authorize("admin"),(req,res)=>{
     res.json({
         message:"Admin DashBoard"
     })
