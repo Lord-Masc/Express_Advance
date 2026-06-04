@@ -16,9 +16,9 @@ app.use(helmet())
 app.use(morgan("dev"))
 
 app.use("/api/auth", authRoutes);
-app.use("api/tasks",taskRoutes)
+app.use("/api/tasks", taskRoutes)
+app.use("/api/users", userRoutes)
 app.use(errorHandler)
-app.use("./api/users",userRoutes)
 
 module.exports = app
 

@@ -1,7 +1,6 @@
-const { MongoAPIError } = require("mongodb");
 const Task = require("../models/taskModel");
 const { asyncHandler } = require("../utils/asyncHandler");
-const {apiError} = require("../utils/apiError")
+const apiError = require("../utils/apiError")
 
 const getTask = asyncHandler(
     async (req, res) => {
@@ -65,10 +64,10 @@ const getTask = asyncHandler(
 )
 const createTask = asyncHandler(
     async (req, res) => {
-        const task = Task.create({
+        const task = await Task.create({
             title: req.body.title,
             description: req.body.description,
-            createdBy: req.body.id
+            createdBy: req.user.id
         })
         res.status(201).json(task)
     }
@@ -76,14 +75,15 @@ const createTask = asyncHandler(
 
 const updateTask = asyncHandler(
     async (req,res) =>{
-        const task = Task.findById({
+        const task = await Task.findOne({
             _id:req.params.id,
             createdBy:req.user.id
         })
         if(!task){
-            throw new apiError()
-            404,
-            "Task Not found"
+            throw new apiError(
+                404,
+                "Task Not found"
+            )
         }
         Object.assign(task,req.body)
 
@@ -96,9 +96,9 @@ const updateTask = asyncHandler(
 )
 const deleteTask = asyncHandler(
     async(req,res)=>{
-        const task = Task.findById({
+        const task = await Task.findOne({
             _id:req.params.id,
-            createdBy:req.body.id
+            createdBy:req.user.id
         })
         if(!task){
             throw new apiError(
