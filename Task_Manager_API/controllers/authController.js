@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
 
 const User = require("../models/userModel");
+const { generateAccessToken, generateRefreshToken } = require("../services/tokenServices");
 
 const register = async (req, res) => {
     try {
@@ -42,18 +42,12 @@ const login = async (req, res) => {
                 message: "Invalid Credential"
             })
         }
-        const token = jwt.sign(
-            {
-                id: user._id,
-                role: user.role
-            },
-            process.env.JWT_SECRET,
-            {
-                expiresIn: "1h"
-            }
-        )
+        const accessToken = generateAccessToken(user)
+        const refreshToken = generateRefreshToken(user)
         res.json({
-            token
+            success: true,
+            accessToken,
+            refreshToken
         })
 
     } catch (error) {

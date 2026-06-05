@@ -2,10 +2,10 @@ const rateLimit = require("express-rate-limit")
 
 const authLimit = rateLimit({
     windowMs:15*60*1000,
-    min:5,
+    max:5,
     message:{
-        sucess:false,
-        message:"To many times resquest"
+        success:false,
+        message:"Too many requests, please try again later"
     }
 })
 

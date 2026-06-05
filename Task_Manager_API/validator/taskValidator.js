@@ -1,14 +1,16 @@
 const {body} = require("express-validator")
 
-exports.createValidator = [
+const createValidator = [
     body("title")
     .notEmpty()
     .withMessage("Title is required")
     .isLength({min:4})
-    .withMessage("Title must be 4 letter"),
+    .withMessage("Title must be at least 4 characters"),
 
     body("description")
     .optional()
     .isLength({min:5})
-    .withMessage("Description must be require at least 5 character")
+    .withMessage("Description must be at least 5 characters")
 ]
+
+module.exports = { createValidator }
